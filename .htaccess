@@ -1,0 +1,18 @@
+#Options +SymLinksIfOwnerMatch
+#DirectoryIndex index.php index.html index.htm
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+##RewriteRule .* index.php [L]
+#RewriteRule ^.*$ test.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteCond %{HTTP_HOST} ^www.iq-lingerie.com/$ [NC]
+RewriteRule ^(.*)$ https://iq-lingerie.com/$1 [R=301,L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.*$ index.php [L]
+</IfModule>
